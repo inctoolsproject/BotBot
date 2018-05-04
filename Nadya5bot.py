@@ -2660,20 +2660,20 @@ def lineBot(op):
                             ret_ += "\n╠ Pengikut : {}".format(format_number(data["user"]["followed_by"]["count"]))
                             ret_ += "\n╠ Diikuti : {}".format(format_number(data["user"]["follows"]["count"]))
                             if data["user"]["is_verified"] == True:
-                                ret_ += "\n╠ Verifikasi : Sudah"
+                                ret_ += "\n╠ Verification: Already"
                             else:
-                                ret_ += "\n╠ Verifikasi : Belum"
+                                ret_ += "\n╠ Verification: Not yet"
                             if data["user"]["is_private"] == True:
-                                ret_ += "\n╠ Akun Pribadi : Iya"
+                                ret_ += "\n╠ Personal Account: Yes"
                             else:
-                                ret_ += "\n╠ Akun Pribadi : Tidak"
+                                ret_ += "\n╠ Personal Account: No"
                             ret_ += "\n╠ Total Post : {}".format(format_number(data["user"]["media"]["count"]))
                             ret_ += "\n╚══[ https://www.instagram.com/{} ]".format(search)
                             path = data["user"]["profile_pic_url_hd"]
                             nadya.sendImageWithURL(to, str(path))
                             nadya.sendMessage(to, str(ret_))
                         except:
-                            nadya.sendMessage(to, "Pengguna tidak ditemukan")
+                            nadya.sendMessage(to, "User not found")
                 elif "instagrampost" in msg.text.lower():
                     separate = msg.text.split(" ")
                     user = msg.text.replace(separate[0] + " ","")
@@ -2776,13 +2776,13 @@ def lineBot(op):
                                 for char in removeString:
                                     lyric = lyric.replace(char,'')
                                 ret_ = "╔══[ Lyric ]"
-                                ret_ += "\n╠ Nama lagu : {}".format(str(song[0]))
-                                ret_ += "\n╠ Durasi : {}".format(str(song[1]))
+                                ret_ += "\n╠ Song name : {}".format(str(song[0]))
+                                ret_ += "\n╠ Duration : {}".format(str(song[1]))
                                 ret_ += "\n╠ Link : {}".format(str(song[4]))
                                 ret_ += "\n╚══[ Finish ]\n{}".format(str(lyric))
                                 nadya.sendMessage(to, str(ret_))
                         except:
-                            nadya.sendMessage(to, "Lirik tidak ditemukan")
+                            nadya.sendMessage(to, "No lyrics found")
             elif msg.contentType == 7:
                 if settings["checkSticker"] == True:
                     stk_id = msg.contentMetadata['STKID']
@@ -2830,14 +2830,14 @@ def lineBot(op):
                     data = json.loads(data)
                     if "result" not in data:
                         ret_ = "╔══[ Weather Status ]"
-                        ret_ += "\n╠ Lokasi : " + data[0].replace("Temperatur di kota ","")
-                        ret_ += "\n╠ Suhu : " + data[1].replace("Suhu : ","")
-                        ret_ += "\n╠ Kelembaban : " + data[2].replace("Kelembaban : ","")
-                        ret_ += "\n╠ Tekanan Udara : " + data[3].replace("Tekanan udara : ","")
-                        ret_ += "\n╠ Kecepatan Angin : " + data[4].replace("Kecepatan angin : ","")
+                        ret_ += "\n╠ Location : " + data[0].replace("Temperatur di kota ","")
+                        ret_ += "\n╠ Temperature : " + data[1].replace("Suhu : ","")
+                        ret_ += "\n╠ Humidity : " + data[2].replace("Kelembaban : ","")
+                        ret_ += "\n╠ Air pressure : " + data[3].replace("Tekanan udara : ","")
+                        ret_ += "\n╠ Wind velocity : " + data[4].replace("Kecepatan angin : ","")
                         ret_ += "\n╚══[ Complete ]"
                     else:
-                        ret_ = "[ Weather Status ] Error : Lokasi tidak ditemukan"
+                        ret_ = "[ Weather Status ] Error : Location not found"
                         nadya.sendMessage(to, str(ret_))
                         
             elif msg.text.lower().startswith("checklocation "):   
@@ -2855,41 +2855,41 @@ def lineBot(op):
                         ret_ += "\n╠ Google Maps : " + link
                         ret_ += "\n╚══[ Complete ]"
                     else:
-                        ret_ = "[ Details Location ] Error : Lokasi tidak ditemukan"
+                        ret_ = "[ Details Location ] Error :Location not found"
                         nadya.sendMessage(to,str(ret_))
                 # Check if only image
                 
             elif text.lower() == 'cpp':
                 settings["changePicture"] = True
-                nadya.sendMessage(to, "Silahkan kirim gambarnya")
+                nadya.sendMessage(to, "Please send the picture")
                 
             elif text.lower() == 'cgp':
                 if msg.toType == 2:
                     if to not in settings["changeGroupPicture"]:
                         settings["changeGroupPicture"].append(to)
-                        nadya.sendMessage(to, "Silahkan kirim gambarnya")
+                        nadya.sendMessage(to, "Please send the picture")
                 
             elif msg.contentType == 1:
                 if settings["changePicture"] == True:
                     path = nadya.downloadObjectMsg(msg_id)
                     settings["changePicture"] = False
                     nadya.updateProfilePicture(path)
-                    nadya.sendMessage(to, "Berhasil mengubah foto profile")
+                    nadya.sendMessage(to, "Successfully changed the photo profile")
                 if msg.toType == 2:
                     if to in settings["changeGroupPicture"]:
                         path = nadya.downloadObjectMsg(msg_id)
                         settings["changeGroupPicture"].remove(to)
                         nadya.updateGroupPicture(to, path)
-                        nadya.sendMessage(to, "Berhasil mengubah foto group")   
+                        nadya.sendMessage(to, "Successfully changed the photo group")   
                             
             elif text.lower() == 'rejectall':
                 ginvited = nadya.ginvited
                 if ginvited != [] and ginvited != None:
                     for gid in ginvited:
                         nadya.rejectGroupInvitation(gid)
-                        nadya.sendMessage(to, "Berhasil tolak sebanyak {} undangan".format(str(len(ginvited))))
+                        nadya.sendMessage(to, "Successfully rejected {} invites".format(str(len(ginvited))))
                 else:
-                    nadya.sendMessage(to, "Tidak ada undangan yang tertunda")
+                    nadya.sendMessage(to, "No pending invitations")
             
             elif text.lower() == 'invgroupcall':    
                 if msg.toType == 2:
@@ -2897,14 +2897,14 @@ def lineBot(op):
                     members = [mem.mid for mem in group.members]
                     call.acquireGroupCallRoute(to)
                     call.inviteIntoGroupCall(to, contactIds=members)
-                    nadya.sendMessage(to, "Berhasil mengundang kedalam telponan group")
+                    nadya.sendMessage(to, "Successfully invited into the call group")
                     
             elif text.lower() == 'removeallchat':
                 nadya.removeAllMessages(op.param2)
-                nadya.sendMessage(to, "Berhasil hapus semua chat")
+                nadya.sendMessage(to, "Successfully deleted all chats")
 
             elif text.lower() == 'time':
-                nadya.sendMessage(to, "Goblok cek sendiri di tanggal jangan manja")
+                nadya.sendMessage(to, "Goofy check yourself on date do not be spoiled")
                 
 
             elif msg.text.lower().startswith("gbroadcast "):   
@@ -2913,7 +2913,7 @@ def lineBot(op):
                 groups = nadya.groups
                 for group in groups:
                     nadya.sendMessage(group, "[ Broadcast ]\n{}".format(str(txt)))
-                    nadya.sendMessage(to, "Berhasil broadcast ke {} group".format(str(len(groups))))
+                    nadya.sendMessage(to, "Successfully broadcast to {} group".format(str(len(groups))))
                     
             elif msg.text.lower().startswith("fbroadcast "):   
                 sep = text.split(" ")
@@ -2921,7 +2921,7 @@ def lineBot(op):
                 friends = nadya.friends
                 for friend in friends:
                     nadya.sendMessage(friend, "[ Broadcast ]\n{}".format(str(txt)))
-                    nadya.sendMessage(to, "Berhasil broadcast ke {} teman".format(str(len(friends))))
+                    nadya.sendMessage(to, "Successfully broadcast to {} friends".format(str(len(friends))))
             elif msg.text.lower().startswith("allbroadcast "):   
                 sep = text.split(" ")
                 txt = text.replace(sep[0] + " ","")
@@ -2929,10 +2929,10 @@ def lineBot(op):
                 groups = nadya.groups
                 for group in groups:
                     nadya.sendMessage(group, "[ Broadcast ]\n{}".format(str(txt)))
-                    nadya.sendMessage(to, "Berhasil broadcast ke {} group".format(str(len(groups))))
+                    nadya.sendMessage(to, "Successfully broadcast to {} group".format(str(len(groups))))
                 for friend in friends:
                     nadya.sendMessage(friend, "[ Broadcast ]\n{}".format(str(txt)))
-                    nadya.sendMessage(to, "Berhasil broadcast ke {} teman".format(str(len(friends))))                             
+                    nadya.sendMessage(to, "Successfully broadcast to {} friends".format(str(len(friends))))                             
                                     
 #===============================================================================[nadyaMID - kiMID]
         if op.type == 19:
