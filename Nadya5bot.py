@@ -56,9 +56,9 @@ ki3MID = ki3.profile.mid
 ki4MID = ki4.profile.mid
 
 Bots = [nadyaMID,kiMID,ki2MID,ki3MID,ki4MID]
-creator = ["u14f64e139a3817afaabe27d237afb36b","u92e4326146a0bf296ca15846aa2a25f6"]
-Owner = ["u2a923e8837ee77316a2a205007938361"]
-admin = ["u2a923e8837ee77316a2a205007938361"]
+creator = ["u3d8eac1d56155ead1762430efc3ccec4"]
+Owner = ["u3d8eac1d56155ead1762430efc3ccec4"]
+admin = ["u3d8eac1d56155ead1762430efc3ccec4"]
 
 nadyaProfile = nadya.getProfile()
 kiProfile = ki.getProfile()
@@ -211,7 +211,7 @@ def helpmessage():
                   "╠➥ Lurking" + "\n" + \
                   "║" + "\n" + \
                   "╠✪〘 Media 〙✪════════" + "\n" + \
-                  "╠➥ Kalender" + "\n" + \
+                  "╠➥ Calendar" + "\n" + \
                   "╠➥ CheckDate「Date」" + "\n" + \
                   "╠➥ InstagramInfo「UserName」" + "\n" + \
                   "╠➥ InstagramPost「UserName」" + "\n" + \
@@ -517,12 +517,12 @@ def lineBot(op):
             if msg.contentType == 13:
                 if settings["wblack"] == True:
                     if msg.contentMetadata["mid"] in settings["commentBlack"]:
-                        nadya.sendMessage(msg.to,"sudah masuk daftar hitam")
+                        nadya.sendMessage(msg.to,"already blacklisted")
                         settings["wblack"] = False
                     else:
                         settings["commentBlack"][msg.contentMetadata["mid"]] = True
                         settings["wblack"] = False
-                        nadya.sendMessage(msg.to,"Itu tidak berkomentar")
+                        nadya.sendMessage(msg.to,"It does not comment")
                 elif settings["dblack"] == True:
                     if msg.contentMetadata["mid"] in settings["commentBlack"]:
                         del settings["commentBlack"][msg.contentMetadata["mid"]]
@@ -530,11 +530,11 @@ def lineBot(op):
                         settings["dblack"] = False
                     else:
                         settings["dblack"] = False
-                        nadya.sendMessage(msg.to,"Tidak ada dalam daftar hitam")
+                        nadya.sendMessage(msg.to,"Not on the blacklist")
 #-------------------------------------------------------------------------------
                 elif settings["wblacklist"] == True:
                     if msg.contentMetadata["mid"] in settings["blacklist"]:
-                        nadya.sendMessage(msg.to,"sudah masuk daftar hitam")
+                        nadya.sendMessage(msg.to,"already blacklisted")
                         settings["wblacklist"] = False
                     else:
                         settings["blacklist"][msg.contentMetadata["mid"]] = True
@@ -573,7 +573,7 @@ def lineBot(op):
                 if text.lower() == 'help':
                     helpMessage = helpmessage()
                     nadya.sendMessage(to, str(helpMessage))
-                    nadya.sendContact(to, "u2a923e8837ee77316a2a205007938361")
+                    nadya.sendContact(to, "u3d8eac1d56155ead1762430efc3ccec4")
                 elif text.lower() == 'texttospeech':
                     helpTextToSpeech = helptexttospeech()
                     nadya.sendMessage(to, str(helpTextToSpeech))
@@ -600,7 +600,7 @@ def lineBot(op):
                 elif text.lower() == 'about':
                     try:
                         arr = []
-                        owner = "u2a923e8837ee77316a2a205007938361"
+                        owner = "u3d8eac1d56155ead1762430efc3ccec4"
                         creator = nadya.getContact(owner)
                         contact = nadya.getContact(nadyaMID)
                         grouplist = nadya.getGroupIdsJoined()
@@ -614,7 +614,7 @@ def lineBot(op):
                         ret_ += "\n╠══[ About Selfbot ]"
                         ret_ += "\n╠ Version : Premium"
                         ret_ += "\n╠ Creator : {}".format(creator.displayName)
-                        ret_ += "\n╚══[ Dilarang Remake Tanpa Ijin :P ]"
+                        ret_ += "\n╚══[ Prohibited Remake Without Permission :P ]"
                         nadya.sendMessage(to, str(ret_))
                     except Exception as e:
                         nadya.sendMessage(msg.to, str(e))
@@ -931,7 +931,7 @@ def lineBot(op):
                     ki3.sendMessage(msg.to,responsename4)
                     ki4.sendMessage(msg.to,responsename5)
                     
-                elif msg.text.lower() == 'absen':
+                elif msg.text.lower() == "absen":
                     if msg._from in Owner:
                         nadya.sendContact(to, nadyaMID)
                         ki.sendContact(to, kiMID)
@@ -1086,7 +1086,7 @@ def lineBot(op):
                             nadya.sendMessage(msg.to, "Successfully clone member wait a while until profile change")
                         except:
                             nadya.sendMessage(msg.to, "Failed clone member")
-                elif text.lower() == 'restoreprofile':
+                elif text.lower() == "restoreprofile":
                   if msg._from in Owner:    
                     try:
                         nadyaProfile.displayName = str(myProfile["displayName"])
@@ -3767,7 +3767,7 @@ def lineBot(op):
                     for ticket_id in n_links:
                         group = nadya.findGroupByTicket(ticket_id)
                         nadya.acceptGroupInvitationByTicket(group.id,ticket_id)
-                        nadya.sendMessage(to, "Berhasil masuk ke group %s" % str(group.name)) 
+                        nadya.sendMessage(to, "Successfully signed in to group %s" % str(group.name)) 
                         
         if op.type == 26:
             print ("[ 26 ] RECEIVE MESSAGE")
