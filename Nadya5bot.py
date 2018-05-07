@@ -1463,16 +1463,16 @@ def lineBot(op):
                         if receiver in read['readPoint']:
                             if read["ROM"][receiver].items() == []:
                                 nadya.sendMessage(receiver,"[ Reader ]:\nNone")
-                        else:
-                            chiya = []
-                            for rom in read["ROM"][receiver].items():
-                                chiya.append(rom[1])
+                            else:
+                                chiya = []
+                                for rom in read["ROM"][receiver].items():
+                                    chiya.append(rom[1])
                                 cmem = nadya.getContacts(chiya) 
                                 zx = ""
                                 zxc = ""
                                 zx2 = []
                                 xpesan = '[ Reader ]:\n'
-                        for x in range(len(cmem)):
+                            for x in range(len(cmem)):
                                 xname = str(cmem[x].displayName)
                                 pesan = ''
                                 pesan2 = pesan+"@c\n"
@@ -1482,13 +1482,15 @@ def lineBot(op):
                                 zx2.append(zx)
                                 zxc += pesan2
                                 text = xpesan+ zxc + "\n[ Lurking time ]: \n" + readTime
-                        try:
-                            nadya.sendMessage(receiver, text, contentMetadata={'MENTION':str('{"MENTIONEES":'+json.dumps(zx2).replace(' ','')+'}')}, contentType=0)
-                        except Exception as error:
-                            print (error)
-                        pass
-                    else:
-                        nadya.sendMessage(receiver,"Lurking has not been set.")
+                            try:
+                                nadya.sendMessage(receiver, text, contentMetadata={'MENTION':str('{"MENTIONEES":'+json.dumps(zx2).replace(' ','')+'}')}, contentType=0)
+                            except Exception as error:
+                                print (error)
+                            pass
+                
+                        else:
+                            nadya.sendMessage(receiver,"Lurking has not been set.")
+                    
                         
 #==============================================================================#
                 elif msg.text.lower().startswith("say-af "):
